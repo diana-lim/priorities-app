@@ -2,7 +2,7 @@ import React from "react";
 
 function PriorityList({ priorities, toggleDone, removePriority }) {
   // Sort by priority: high > medium > low
-  const priorityOrder = { high: 1, medium: 2, low: 3 };
+  const priorityOrder = { highest: 1, high: 2, medium: 3, low: 4, lowest: 5 };
   const sorted = [...priorities].sort(
     (a, b) => priorityOrder[a.level] - priorityOrder[b.level]
   );

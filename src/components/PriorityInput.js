@@ -28,9 +28,11 @@ function PriorityInput({ addPriority }) {
         onChange={(e) => setLevel(e.target.value)}
         className="border p-2 rounded"
       >
+        <option value="high">Highest 🔴</option>
         <option value="high">High 🔴</option>
         <option value="medium">Medium 🟡</option>
         <option value="low">Low 🟢</option>
+        <option value="low">Lowest 🟢</option>
       </select>
       <button type="submit" className="bg-blue-500 text-white px-4 rounded">
         Add
