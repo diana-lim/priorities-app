@@ -1,11 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
 import PriorityInput from "./components/PriorityInput";
 import PriorityList from './components/PriorityList';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   const [priorities, setPriorities] = useState([]);
+
+  // Load saved priorities from LocalStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("priorities");
+    if(saved) {
+      // setPriorities(JSON.parse(saved));
+      try {
+        const parsed = JSON.parse(saved);
+        if(Array.isArray(parsed)) {
+          setPriorities(parsed);
+        }
+        else {
+          console.warn("Saved priorities is not an array, ignoring.")
+        }
+      }
+      catch (error) {
+        console.warn("Failed to parse priorities from localStorage:", error);
+      }
+    }
+  }, []);
+
+  // Save priorities to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem("priorities", JSON.stringify(priorities));
+  }, [priorities])
 
   // Add a new priority
   const addPriority = (text, level) => {
