@@ -4,27 +4,21 @@ import PriorityList from './components/PriorityList';
 import { useState, useEffect } from 'react';
 
 function App() {
-  const [priorities, setPriorities] = useState([]);
-
-  // Load saved priorities from LocalStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("priorities");
-    if(saved) {
-      // setPriorities(JSON.parse(saved));
-      try {
-        const parsed = JSON.parse(saved);
-        if(Array.isArray(parsed)) {
-          setPriorities(parsed);
-        }
-        else {
-          console.warn("Saved priorities is not an array, ignoring.")
-        }
-      }
-      catch (error) {
-        console.warn("Failed to parse priorities from localStorage:", error);
-      }
+  const [priorities, setPriorities] = useState(() => {
+    try {
+      const saved = localStorage.getItem("priorities");
+      const parsed = saved ? JSON.parse(saved) : [];
+      return Array.isArray(parsed) ? parsed : [];
     }
-  }, []);
+    catch {
+      return [];
+    }
+  });
+
+  const [editingId, setEditingId] = useState(null);
+  const [editingText, setEditingText] = useState("");
+  const [editingLevel, setEditingLevel] = useState("");
+
 
   // Save priorities to localStorage when it changes
   useEffect(() => {
@@ -54,6 +48,18 @@ function App() {
     setPriorities(priorities.filter((p) => p.id !== id));
   };
 
+  // Save edits to a priority
+  const saveEdit = (id) => {
+    setPriorities((prev) =>
+      prev.map((p) =>
+        p.id === id ? { ...p, text: editingText, level: editingLevel } : p
+      )
+    );
+    setEditingId(null);
+    setEditingText("");
+    setEditingLevel("");
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <h1 className="text-3xl font-bold mb-6 text-center">My Priorities</h1>
@@ -62,6 +68,11 @@ function App() {
         priorities={priorities}
         toggleDone={toggleDone}
         removePriority={removePriority}
+        editingId={editingId}
+        editingText={editingText}
+        setEditingId={setEditingId}
+        setEditingText={setEditingText}
+        saveEdit={saveEdit}
       />
     </div>
   );
