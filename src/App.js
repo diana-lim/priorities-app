@@ -18,6 +18,7 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
   const [editingLevel, setEditingLevel] = useState("");
+  const [showAll, setShowAll] = useState(false);
 
 
   // Save priorities to localStorage when it changes
@@ -61,9 +62,31 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <h1 className="text-3xl font-bold mb-6 text-center">My Priorities</h1>
-      <PriorityInput addPriority={addPriority} />
+    <div className="min-h-screen bg-gray-50 p-8 relative">
+      <h1 className="text-3xl font-bold mb-12 text-center">Don't forget to...</h1>
+      <PriorityList
+        priorities={priorities.slice(0, 3)} // show only top 3
+        toggleDone={toggleDone}
+        removePriority={removePriority}
+        editingId={editingId}
+        editingText={editingText}
+        editingLevel={editingLevel}
+        setEditingId={setEditingId}
+        setEditingText={setEditingText}
+        setEditingLevel={setEditingLevel}
+        saveEdit={saveEdit}
+      />
+
+      <div className="text-center my-2">
+        <button
+          onClick={() => setShowAll(!showAll)}
+          className="text-blue-500 hover:underline"
+        >
+          {showAll ? "Hide All Reminders" : "View All Reminders"}
+        </button>
+      </div>
+
+      {showAll && (
       <PriorityList
         priorities={priorities}
         toggleDone={toggleDone}
@@ -74,6 +97,15 @@ function App() {
         setEditingText={setEditingText}
         saveEdit={saveEdit}
       />
+      )}
+
+      <div className="fixed bottom-0 left-0 w-full bg-white/90 backdrop-blur-md border-t border-gray-200 transition-all duration-200">
+        <div className="max-w-xl mx-auto p-4">
+          <PriorityInput addPriority={addPriority} />
+        </div>
+      </div>
+
+
     </div>
   );
 }
