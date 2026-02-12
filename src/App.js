@@ -15,6 +15,12 @@ function App() {
     }
   });
 
+  // Sort by priority: high > medium > low
+  const priorityOrder = { highest: 1, high: 2, medium: 3, low: 4, lowest: 5 };
+  const sortedPriorities = [...priorities].sort(
+    (a, b) => priorityOrder[a.level] - priorityOrder[b.level]
+  );
+
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
   const [showAll, setShowAll] = useState(false);
@@ -64,7 +70,7 @@ function App() {
       <h1 className="text-3xl font-bold mb-12 text-center">Don't forget to...</h1>
       <div className='overflow-y-auto' style={{ height: '65vh' }}>
         <PriorityList
-          priorities={priorities.slice(0, 3)} // show only top 3
+          priorities={sortedPriorities.slice(0, 3)} // show only top 3
           toggleDone={toggleDone}
           removePriority={removePriority}
           editingId={editingId}
@@ -76,7 +82,7 @@ function App() {
 
         {showAll && (
         <PriorityList
-          priorities={priorities.slice(3)}
+          priorities={sortedPriorities.slice(3)}
           toggleDone={toggleDone}
           removePriority={removePriority}
           editingId={editingId}

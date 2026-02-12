@@ -10,11 +10,6 @@ function PriorityList({
     setEditingText,
     saveEdit 
 }) {
-  // Sort by priority: high > medium > low
-  const priorityOrder = { highest: 1, high: 2, medium: 3, low: 4, lowest: 5 };
-  const sorted = [...priorities].sort(
-    (a, b) => priorityOrder[a.level] - priorityOrder[b.level]
-  );
 
   // Background colors
   const borderColor = {
@@ -27,7 +22,7 @@ function PriorityList({
 
   return (
     <div className="max-w-xl mx-auto space-y-3 mb-4">
-      {sorted.map((p) => (
+      {priorities.map((p) => (
         <div
         key={p.id}
         className={`p-4 rounded flex justify-between items-center bg-white ${borderColor[p.level]}`}
@@ -100,7 +95,7 @@ function PriorityList({
             </div>
         </div>
       ))}
-      {sorted.length === 0 && (
+      {priorities.length === 0 && (
         <p className="text-center text-gray-500">No priorities yet!</p>
       )}
     </div>
