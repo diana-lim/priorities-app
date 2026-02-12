@@ -17,7 +17,6 @@ function App() {
 
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
-  const [editingLevel, setEditingLevel] = useState("");
   const [showAll, setShowAll] = useState(false);
 
 
@@ -53,12 +52,11 @@ function App() {
   const saveEdit = (id) => {
     setPriorities((prev) =>
       prev.map((p) =>
-        p.id === id ? { ...p, text: editingText, level: editingLevel } : p
+        p.id === id ? { ...p, text: editingText } : p
       )
     );
     setEditingId(null);
     setEditingText("");
-    setEditingLevel("");
   };
 
   return (
@@ -71,10 +69,8 @@ function App() {
           removePriority={removePriority}
           editingId={editingId}
           editingText={editingText}
-          editingLevel={editingLevel}
           setEditingId={setEditingId}
           setEditingText={setEditingText}
-          setEditingLevel={setEditingLevel}
           saveEdit={saveEdit}
         />
 

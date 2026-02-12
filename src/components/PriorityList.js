@@ -6,10 +6,8 @@ function PriorityList({
     removePriority,
     editingId,
     editingText,
-    editingLevel,
     setEditingId,
     setEditingText,
-    setEditingLevel,
     saveEdit 
 }) {
   // Sort by priority: high > medium > low
