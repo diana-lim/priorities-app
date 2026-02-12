@@ -62,20 +62,35 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8 relative">
+    <div className="min-h-screen bg-gray-200 p-8 relative">
       <h1 className="text-3xl font-bold mb-12 text-center">Don't forget to...</h1>
-      <PriorityList
-        priorities={priorities.slice(0, 3)} // show only top 3
-        toggleDone={toggleDone}
-        removePriority={removePriority}
-        editingId={editingId}
-        editingText={editingText}
-        editingLevel={editingLevel}
-        setEditingId={setEditingId}
-        setEditingText={setEditingText}
-        setEditingLevel={setEditingLevel}
-        saveEdit={saveEdit}
-      />
+      <div className='overflow-y-auto' style={{ height: '65vh' }}>
+        <PriorityList
+          priorities={priorities.slice(0, 3)} // show only top 3
+          toggleDone={toggleDone}
+          removePriority={removePriority}
+          editingId={editingId}
+          editingText={editingText}
+          editingLevel={editingLevel}
+          setEditingId={setEditingId}
+          setEditingText={setEditingText}
+          setEditingLevel={setEditingLevel}
+          saveEdit={saveEdit}
+        />
+
+        {showAll && (
+        <PriorityList
+          priorities={priorities.slice(3)}
+          toggleDone={toggleDone}
+          removePriority={removePriority}
+          editingId={editingId}
+          editingText={editingText}
+          setEditingId={setEditingId}
+          setEditingText={setEditingText}
+          saveEdit={saveEdit}
+        />
+        )}
+      </div>
 
       <div className="text-center my-2">
         <button
@@ -85,19 +100,6 @@ function App() {
           {showAll ? "Hide All Reminders" : "View All Reminders"}
         </button>
       </div>
-
-      {showAll && (
-      <PriorityList
-        priorities={priorities}
-        toggleDone={toggleDone}
-        removePriority={removePriority}
-        editingId={editingId}
-        editingText={editingText}
-        setEditingId={setEditingId}
-        setEditingText={setEditingText}
-        saveEdit={saveEdit}
-      />
-      )}
 
       <div className="fixed bottom-0 left-0 w-full bg-white/90 backdrop-blur-md border-t border-gray-200 transition-all duration-200">
         <div className="max-w-xl mx-auto p-4">

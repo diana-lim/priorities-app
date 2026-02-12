@@ -19,20 +19,20 @@ function PriorityList({
   );
 
   // Background colors
-  const bgColor = {
-    highest: "border-black-100 border-2",
-    high: "border-gray-800 border-2",
-    medium: "border-gray-600 border-2",
-    low: "border-blue-800 border-2",
-    lowest: "border-green-100 border-2",
+  const borderColor = {
+    highest: "border-black border-2",
+    high: "border-black border-2",
+    medium: "border-blue-600 border-2",
+    low: "border-green-600 border-2",
+    lowest: "border-green-600 border-2",
   };
 
   return (
-    <div className="max-w-xl mx-auto space-y-3">
+    <div className="max-w-xl mx-auto space-y-3 mb-4">
       {sorted.map((p) => (
         <div
         key={p.id}
-        className={`p-4 rounded flex justify-between items-center ${bgColor[p.level]}`}
+        className={`p-4 rounded flex justify-between items-center bg-white ${borderColor[p.level]}`}
         >
           {editingId === p.id ? (
             // Edit mode
