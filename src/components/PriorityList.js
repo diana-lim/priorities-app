@@ -95,9 +95,6 @@ function PriorityList({
             </div>
         </div>
       ))}
-      {priorities.length === 0 && (
-        <p className="text-center text-gray-500">No priorities yet!</p>
-      )}
     </div>
   );
 }
