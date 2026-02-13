@@ -71,6 +71,7 @@ function App() {
       <div className='overflow-y-auto' style={{ height: '65vh' }}>
         <PriorityList
           priorities={sortedPriorities.slice(0, 3)} // show only top 3
+          startIndex={0}
           toggleDone={toggleDone}
           removePriority={removePriority}
           editingId={editingId}
@@ -83,6 +84,7 @@ function App() {
         {showAll && (
         <PriorityList
           priorities={sortedPriorities.slice(3)}
+          startIndex={3}
           toggleDone={toggleDone}
           removePriority={removePriority}
           editingId={editingId}

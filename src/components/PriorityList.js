@@ -1,7 +1,8 @@
 import React from "react";
 
 function PriorityList({ 
-    priorities, 
+    priorities,
+    startIndex, 
     toggleDone, 
     removePriority,
     editingId,
@@ -22,7 +23,7 @@ function PriorityList({
 
   return (
     <div className="max-w-xl mx-auto space-y-3 mb-4">
-      {priorities.map((p) => (
+      {priorities.map((p, index) => (
         <div
         key={p.id}
         className={`p-4 rounded flex justify-between items-center bg-white ${borderColor[p.level]}`}
@@ -50,7 +51,9 @@ function PriorityList({
                 p.done ? "line-through text-gray-500" : ""
               }`}
             >
-              {p.text}
+          {startIndex + index < 3 && <span>{startIndex + index + 1}.) </span>}
+          <span>{p.text}</span>
+              
             </div>
           )}
 
